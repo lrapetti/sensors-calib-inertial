@@ -67,7 +67,7 @@ acquiredParts = {'torso'};
 % head     :       head_imu 3D accelerometer
 % mtbSensorAct idx:  1
 % 
-% torso    :       9b7..9b10
+% torso    :       0b7..0b10
 % mtbSensorAct idx:  7....10
 % 
 % some sensors are de-activated because of faulty behaviour
