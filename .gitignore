@@ -12,3 +12,4 @@ wiki/
 matlab-workspace
 octave-workspace
 src/app/dataLogInfoMap.txt
+src/conf/dataLogInfoMap.txt
