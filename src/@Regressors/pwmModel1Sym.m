@@ -18,7 +18,7 @@ y = y(filtIdxes);
 x = x(filtIdxes);
 
 % format X adding the column of ones
-M = @(dq) [ones(size(dq)) dq]
+M = @(dq) [ones(size(dq)) dq];
 X = M(x);
 
 % process the model

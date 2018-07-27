@@ -13,7 +13,7 @@ if size(x,1) ~= size(y,1) || ~iscolumn(y)
 end
 
 % format X adding the column of ones
-M = @(dq) [ones(size(dq)) dq]
+M = @(dq) [ones(size(dq)) dq];
 X = M(x);
 
 % process the model
