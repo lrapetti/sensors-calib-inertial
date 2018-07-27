@@ -1,7 +1,7 @@
 % We support two control modes: position and pwm.
 % Before this script is run, 'motor' is set to the joints/motors group
 % being calibrated. Here we are running the calibration of the bemf
-% friction parameters (1rst phase). The targeted joint is kept in PWM 
+% friction parameters (2rst phase). The targeted joint is kept in PWM 
 % control (PWM = 0).
 
 

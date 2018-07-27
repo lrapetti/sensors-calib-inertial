@@ -1,6 +1,6 @@
 % We support two control modes: position and pwm.
 % Before this script is run, 'motor' is set to the joints/motors group
-% being calibrated. Here we are running the Kcurr parameter (2nd phase).
+% being calibrated. Here we are running the Kcurr parameter (1nd phase).
 % The targeted joint is kept in position control.
 
 
