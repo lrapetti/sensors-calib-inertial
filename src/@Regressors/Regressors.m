@@ -3,6 +3,7 @@ classdef Regressors < handle
     %   Detailed explanation goes here
     
     properties
+        pwmModel1Sym = @Regressors.filteredNormailEquation;
     end
     
     methods (Static=true)
@@ -10,7 +11,7 @@ classdef Regressors < handle
         
         model = normalEquation(x,y);
         
-        model = pwmModel1Sym(x,y);
+        model = filteredNormalEquation(x,y);
         
         model = frictionModel1Sym(x,y);
         
