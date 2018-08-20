@@ -17,8 +17,8 @@ end
 % Controller back to default init state
 
 % stop and delete plotter thread
-obj.plotterThread.stop(true);
-delete(obj.plotterThread);
+% obj.plotterThread.stop(true);
+% delete(obj.plotterThread);
 
 if ~isempty(obj.ctrllerThread)
     delete(obj.ctrllerThread);

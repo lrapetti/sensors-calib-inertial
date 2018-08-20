@@ -9,9 +9,15 @@ classdef MotionSequencer < handle
         calibApp;
         robotModel;
         sequences;
+        seqIdx; %WIP
         logCmd;
         dummyCmd;
         ctrlBoardRemap;
+        
+        % plotter thread (slave) %WIP
+        plotterThread@RateThread;  %WIP
+        % temporary plot parameters %WIP
+        tempPlot@struct; %WIP
     end
     
     methods(Access = public)
@@ -32,6 +38,8 @@ classdef MotionSequencer < handle
             
             % create ctrl board remapper
             obj.ctrlBoardRemap = RemoteControlBoardRemapper(robotModel,calibApp);
+            
+            obj.tempPlot = struct('figH',[],'an',[],'units',[],'convertFromRad',[]); %WIP
         end
         
         acqSensorDataAccessor = run(obj);
@@ -39,6 +47,12 @@ classdef MotionSequencer < handle
     
     methods(Access = protected)
         runSeq = seqMap2runner(obj,seqParamsMap);
+        ok = runRealtimePlotter(obj,threadPeriod,threadTimeout); %WIP
+        % Rate thread functions for the real-time plotter %WIP
+        plotterThreadStartFcn(obj); %WIP
+        plotterThreadStopFcn(obj); %WIP
+        plotterThreadUpdateFcn(obj); %WIP
+        [x,y] = getDataPoint(obj); %WIP2
     end
     
     methods(Static = true, Access = protected)

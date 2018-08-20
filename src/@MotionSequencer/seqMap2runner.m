@@ -29,6 +29,29 @@ else
     [runSeq.ctrl.vel{:}] = deal([]);
 end
 
+if ismember('plot',fieldnames(runSeq))
+    % list of sensors for measurements
+    runSeq.plot.sensor = fieldnames(runSeq.plot)';
+    % list of parts and 'acquire' flag for measurements
+    [runSeq.plot.part,runSeq.plot.acquire] = cellfun(...
+        @(sensor) deal(...
+        fieldnames(runSeq.plot.(sensor))',...
+        cell2mat(struct2cellConcat(runSeq.plot.(sensor)))),...
+        runSeq.plot.sensor,...
+        'UniformOutput',false);
+    % remove obsolete fields
+    for cField = runSeq.plot.sensor
+        field = cField{:};
+        runSeq.plot = rmfield(runSeq.plot,field);
+    end
+    % set logger function
+    runSeq.logCmd = obj.logCmd;
+else
+    runSeq.plot.sensor = {}; runSeq.plot.part = {}; runSeq.plot.acquire = {};
+    % set logger function
+    runSeq.logCmd = obj.dummyCmd;
+end
+
 if ismember('meas',fieldnames(runSeq))
     % list of sensors for measurements
     runSeq.meas.sensor = fieldnames(runSeq.meas)';
@@ -99,6 +122,7 @@ else
     runSeq.prpt = cell(size(runSeq.ctrl.pos,1),1);
     runSeq.prpt(:) = {@() []};
 end
+
 
 end
 

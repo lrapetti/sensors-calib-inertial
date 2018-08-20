@@ -3,10 +3,10 @@
 %====================================================================
 
 %% Common model and calibration input parameters
-modelName = 'iCubGenova04'; % as the models defined in 'icub-models' repo
+modelName = 'iCubGenova02' %'iCubGenova02'; % as the models defined in 'icub-models' repo
 dataPath  = '../../data/dumper';
 %modelPath = '../models/icubSim/icub.urdf';
-modelPath = '../models/iCubGenova04/model.urdf';
+modelPath = '../models/iCubGenova02/model.urdf'; %'../models/iCubGenova02/model.urdf';
 %calibrationMapFile = '../../data/calibration/calibrationMap_#6.mat';
 calibrationMapFile = 'calibrationMap.mat';
 %calibrationMapFile = '';
@@ -20,8 +20,8 @@ calibrateAccelerometers = false;
 calibrateJointEncoders  = false;
 calibrateFTsensors      = false;
 calibrateGyroscopes     = false;
-calibrateLowLevTauCtrl  = true;
-calibrateLowLevCurrCtrl = false;
+calibrateLowLevTauCtrl  = false;
+calibrateLowLevCurrCtrl = true;
 
 %% Diagnosis and visualization
 runDiagnosis = false;
@@ -290,7 +290,7 @@ clear calibedParts calibedJointsIdxes savePlot exportPlot loadJointPos ...
 
 % Calibrated parts:
 % Only the joint parameters from these parts (limbs) will be calibrated
-calibedParts = {'right_leg'};
+calibedParts = {'left_leg'};
 
 % Fine selection of joints to calibrate:
 % Select the joints to calibrate through the respective indexes. These indexes match 

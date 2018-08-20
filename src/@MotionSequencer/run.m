@@ -12,8 +12,9 @@ obj.logCmd.sched();
 
 % process each sequence
 for seqIdx = 1:numel(obj.sequences)
-    % get next sequence to run
-    sequence = obj.sequences{seqIdx};
+    obj.seqIdx = seqIdx; %WIP
+    % get next sequence to run %WIP
+    sequence = obj.sequences{obj.seqIdx}; %WIP
     
     % open ctrl board remapper driver
     obj.ctrlBoardRemap.open(sequence.ctrl.part);
@@ -46,13 +47,16 @@ for seqIdx = 1:numel(obj.sequences)
         sequence.logCmd.stop(sensors,partsToStop);
         sequence.logCmd.start(sensors,partsToStart);
         
+        % Load sampling and timeout parameters
+        config = Init.load('lowLevCtrlCalibratorDevConfig');
+        
         % The following processing depends on the control mode
         switch sequence.mode{stepIdx}
             case 'ctrl'    % position control
                 % Set joints in position control mode
                 [jointsIdxList,~] = obj.ctrlBoardRemap.getJointsMappedIdxes(obj.ctrlBoardRemap.jointsList);
                 obj.ctrlBoardRemap.setJointsControlMode(jointsIdxList,'ctrl');
-                
+
                 % get next position, velocity and acquire flag from the
                 % sequence. Get concatenated matrices for all parts
                 pos = sequence.ctrl.pos(stepIdx,:);
@@ -100,7 +104,23 @@ for seqIdx = 1:numel(obj.sequences)
                 promptString = sequence.prpt{stepIdx}();
                 if ~isempty(promptString)
                     fprintf(promptString);
-                    pause;
+                    
+                    if not(isempty(sequence.plot.acquire)) && sequence.plot.acquire{1}(stepIdx) % WIP
+                        % Run the real-time plotter %WIP
+                        ok = obj.runRealtimePlotter(config.plotterThread.samplingPeriod,config.plotterThread.timeout); %WIP
+                        
+                        pause;
+                        
+                        % stop and delete plotter thread %WIP
+                        if ~isempty(obj.plotterThread)
+                            obj.plotterThread.stop(true);
+                            delete(obj.plotterThread);
+                        end
+                    else
+                        pause;
+                    end
+                    
+                    
                 end
                 
                 % Stop the controller. This also restores the previous
@@ -111,6 +131,7 @@ for seqIdx = 1:numel(obj.sequences)
             otherwise
                 error('Unknown control mode!');
         end
+        
     end
     
     % Stop logging of last step and close log

@@ -38,6 +38,8 @@ classdef MotorPWMcontroller < handle
         plotterThread@RateThread;
         % temporary plot parameters
         tempPlot@struct;
+        % real-time plotter
+        RTPlotter@RealtimePlotter;
     end
     
     methods
